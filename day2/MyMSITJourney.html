@@ -14,19 +14,25 @@
             }
             th, td {
                 padding: 15px;
-
             }
             div {
-                color: blue;
-                
+                color: green;
+            }
+            #top {
+                color: red;
+                text-align: center;
+                margin: 20px;
+            }
+            .bottom {
+                text-align: center;
             }
         </style>
     </head>
 
     <body style="background-color: darkgrey;">
-        <h1><u>Photo</u>:</h1>
-        <img src="vamsi.jpg" height = 100px ; weight = 100px>
-        <div>
+        <div id="top">
+            <h1 style="text-align: center;"><u>Photo</u>:</h1>
+            <img src="vamsi.jpg" height = 100px ; weight = 100px >
             <h1><u>About me</u>:</h1>
             <p>My name is Vamsi Krishna Nunna. I am currently pursing Masters in Information Technology(MSIT)<br>
                 in IIIT-Hyderabad. I passed first semester where it contains 6 courses. I promoted to second <br>
@@ -67,5 +73,11 @@
                 <td>Passed upto now</td>
             </tr>
         </table>
+        <span class="bottom"> 
+            <form>
+                <input type="text" placeholder="give the feedback" name="name">
+                <button>Completed</button>
+            </form>
+        </span>
     </body>
 </html>
