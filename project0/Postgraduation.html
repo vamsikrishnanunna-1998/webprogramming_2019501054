@@ -10,31 +10,42 @@
                 font-weight: 200;
             }
             table, th, td {
+                margin: 40px;
+                padding: 15px;
                 border: 1px solid black;
                 border-collapse: collapse;
-            }
-            th, td {
-                padding: 15px;
             }
             div {
                 color: green;
             }
             #top {
-                color: red;
                 text-align: center;
                 margin: 20px;
             }
             .bottom {
                 text-align: center;
             }
+            @media screen and (min-width: 600px) {
+            div {
+                font-size: auto;
+
+                }
+            }
+
+            /* If screen size is 600px wide, or less, set the font-size of <div> to 30px */
+            @media screen and (max-width: 600px) {
+            div {
+                display: none;
+
+                }
+            }
         </style>
+        
     </head>
 
-    <body style="background-color: darkgrey;">
+    <body>
         <a class="btn btn-primary" href="index.html" role="button">Back</a>
         <div id="top">
-            <h1 style="text-align: center;"><u>Photo</u>:</h1>
-            <img src="vamsi.jpg" height = 100px ; weight = 100px >
             <h1><u>About me</u>:</h1>
             <p>My name is Vamsi Krishna Nunna. I am currently pursing Masters in Information Technology(MSIT)<br>
                 in IIIT-Hyderabad. I passed first semester where it contains 6 courses. I promoted to second <br>
@@ -62,8 +73,8 @@
                 <li>Software App Development</li>
             </ol>
         </div>
-        <h1><u>My Experiences</u>:</h1>
         <table>
+        <h1><u>My Experiences</u>:</h1>
             <tr>
                 <th>S.NO</th>
                 <th>First Semester</th>
