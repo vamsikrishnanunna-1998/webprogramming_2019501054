@@ -8,7 +8,7 @@ I created the html content for all the educational background.
 i.e 
 Postgraduation.html
 favourites.html
-
+Education.html
 
 In Postgraduation.html
 I described about my msit journey where i included all the content
@@ -19,3 +19,5 @@ favourites.html
 I described a grid with bootstrap including details like socilamedia ,
  food, movies, actors,etc
 
+Education.html
+I described scss concept including the concepts like inheritance and bootstrap there.

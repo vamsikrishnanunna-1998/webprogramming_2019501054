@@ -1,0 +1,23 @@
+%message {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 20px;
+    margin: 20px;
+}
+
+.btech {
+    @extend %message;
+    background-color: green;
+}
+
+.intermediate {
+    @extend %message;
+    background-color: orange;
+}
+
+.Matriculation {
+    @extend %message;
+    background-color: red;
+}
