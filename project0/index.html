@@ -2,8 +2,53 @@
 <html>
     <head>
         <title>My Webpage</title>
+        <style>
+            h1 {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: x-large;
+                font-weight: 200;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+            }
+            div {
+                color: green;
+            }
+            #top {
+                color: red;
+                text-align: center;
+                margin: 20px;
+            }
+            .bottom {
+                text-align: center;
+            }
+        </style>
     </head>
-    <body>
-        Hello, world!
+    <body style="background-color: darkgrey;">
+        <div id="top">
+            <h1 style="text-align: center;"><u>Photo</u>:</h1>
+            <img src="vamsi.jpg" height = 100px ; weight = 100px >
+            <h1><u>About me</u>:</h1>
+            <p>My name is Vamsi Krishna Nunna. I am currently pursing Masters in Information Technology(MSIT)<br>
+                in IIIT-Hyderabad. I passed first semester where it contains 6 courses. I promoted to second <br>
+                Semester. I did various projects in MSIT which helps me alot. There is soft skills course which <br>
+                is greatly used for the multinational companies hiring process. Totally,MSIT is learning by doing.</p>
+        </div>
+        <ul>
+            <h1><u>Contents</u></h1>
+            <li><a href="Postgraduation.html">My M.S.I.T Journey</a></li>
+            <!-- <li><a href="#section2">Section 2</a></li> -->
+            <!-- <li><a href="#section3">Section 3</a></li> -->
+        </ul>
+        <span class="bottom"> 
+            <form>
+                <input type="text" placeholder="give the feedback" name="name">
+                <button>Completed</button>
+            </form>
+        </span>
     </body>
 </html>
