@@ -8,9 +8,7 @@ from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-
 app = Flask(__name__)
-
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -28,12 +26,14 @@ SESSION = db()
 
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    if session["username"] != None:
+        return render_template("login.html", username= session["username"])
+    return redirect("/register")
 
 @app.route("/register",methods=["GET", "POST"])
 def cont():
     if request.method == "GET":
-        return render_template("registration.html")
+        return render_template("registration.html",data = "Please Login")
     else:
         username = request.form.get("username")
         pwd = request.form.get("pwd")
@@ -48,11 +48,11 @@ def cont():
             print("added")
             SESSION.commit()
             print("commited") 
-            return render_template("register.html",username=username)
+            return render_template("registration.html", data="Registered successfully, Please Login")
         except:
-            return render_template("errorpage.html")
+            return render_template("registration.html",text="error, please check again")
  
-@app.route("/admin")
+@app.route("/admin", methods = ["GET"])
 def table():
     users = db.query(model)
     return render_template("admin.html",user_details=users)
@@ -64,7 +64,7 @@ def login():
         pwd = request.form.get("pwd")
         email = request.form.get("email")
         user = db.query(model).get(username)
-        session["email"] = email
+        session["username"] = username
         if user != None:
             if pwd == user.pwd:
                 return render_template("login.html",username=username)
