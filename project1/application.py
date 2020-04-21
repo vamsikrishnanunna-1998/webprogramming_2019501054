@@ -26,12 +26,14 @@ SESSION = db()
 
 @app.route("/")
 def index():
-    if session["username"] != None:
-        return render_template("login.html", username= session["username"])
+    if session.get("username") is not None:
+        return render_template("login.html", username= session.get("username"))
     return redirect("/register")
-
+ 
 @app.route("/register",methods=["GET", "POST"])
-def cont():
+def form():
+    if session.get("username") != None:
+        return render_template("login.html", username= session.get("username"))
     if request.method == "GET":
         return render_template("registration.html",data = "Please Login")
     else:
@@ -50,7 +52,7 @@ def cont():
             print("commited") 
             return render_template("registration.html", data="Registered successfully, Please Login")
         except:
-            return render_template("registration.html",text="error, please check again")
+            return render_template("registration.html",text="User already exists, Please Login")
  
 @app.route("/admin", methods = ["GET"])
 def table():

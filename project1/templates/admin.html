@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>admin page</title>
+        <style>
+            body {
+                background-color: blanchedalmond;
+            }
+            h1 {
+              text-align: center;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+        </style>
+    </head>
     <body>
-        <h1>Admin</h1><br>
-        <table border = 1>
-            <th>{{ "username" }}</th>
-            <th>{{ "email" }}</th>
-            <th>{{ "password" }}</th>
-            <th>{{ "timestamp" }}</th>
-            {% for i in user_details %}
-            <tr>
-                <td> {{ i.username }}</td>
-                <td> {{ i.EmailId }}</td>
-                <td> {{ i.pwd }}</td>
-                <td> {{ i.datetime }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
+        
+            <h1>Admin</h1><br>
+            <div class="tableclass">
+            <table align="center">
+                <th>{{ "username" }}</th>
+                <th>{{ "email" }}</th>
+                <th>{{ "password" }}</th>
+                <th>{{ "timestamp" }}</th>
+                {% for i in user_details %}
+                <tr>
+                    <td> {{ i.username }}</td>
+                    <td> {{ i.EmailId }}</td>
+                    <td> {{ i.pwd }}</td>
+                    <td> {{ i.datetime }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </body>
 </html>
