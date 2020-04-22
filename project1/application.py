@@ -1,12 +1,17 @@
 import os
+import datetime
+from model import *
 
-from flask import Flask, session
+
+from flask import Flask, session, render_template, request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from flask import Flask, render_template, request
+
 
 app = Flask(__name__)
+
+# app.config["SQLALCHEMY_TRACK_MODIFIACTIONS"] = False
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -20,7 +25,7 @@ Session(app)
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-
+session = db()
 
 @app.route("/")
 def index():
@@ -31,7 +36,25 @@ def cont():
     if request.method == "GET":
         return render_template("registration.html")
     else:
-        username=request.form.get("username")
-        EmailID=request.form.get("email")
-        phone=request.form.get("phone")
-        return render_template("register.html",username=username)
+        username = request.form.get("username")
+        pwd = request.form.get("pwd")
+        EmailId = request.form.get("email")
+        timestamp = datetime.datetime.now()
+        print(username)
+        print(EmailId)
+        print(timestamp) 
+        temp = model(username=username,pwd=pwd,EmailId=EmailId,datetime=timestamp)
+        try: 
+            session.add(temp)
+            print("added")
+            session.commit()
+            print("commited") 
+            return render_template("register.html",username=username)
+        except:
+            return render_template("errorpage.html")
+ 
+@app.route("/admin")
+def table():
+    users = db.query(model)
+    return render_template("admin.html",user_details=users)
+
