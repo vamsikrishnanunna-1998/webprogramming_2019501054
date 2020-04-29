@@ -1,10 +1,12 @@
 import os
+import datetime
+from model import *
 
-from flask import Flask, session
+
+from flask import Flask, session, render_template, request, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -20,18 +22,60 @@ Session(app)
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-
+SESSION = db()
 
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    if session["username"] != None:
+        return render_template("login.html", username= session["username"])
+    return redirect("/register")
 
 @app.route("/register",methods=["GET", "POST"])
 def cont():
     if request.method == "GET":
-        return render_template("registration.html")
+        return render_template("registration.html",data = "Please Login")
     else:
-        username=request.form.get("username")
-        EmailID=request.form.get("email")
-        phone=request.form.get("phone")
-        return render_template("register.html",username=username)
+        username = request.form.get("username")
+        pwd = request.form.get("pwd")
+        EmailId = request.form.get("email")
+        timestamp = datetime.datetime.now()
+        print(username)
+        print(EmailId)
+        print(timestamp) 
+        temp = model(username=username,pwd=pwd,EmailId=EmailId,datetime=timestamp)
+        try: 
+            SESSION.add(temp)
+            print("added")
+            SESSION.commit()
+            print("commited") 
+            return render_template("registration.html", data="Registered successfully, Please Login")
+        except:
+            return render_template("registration.html",text="error, please check again")
+ 
+@app.route("/admin", methods = ["GET"])
+def table():
+    users = db.query(model)
+    return render_template("admin.html",user_details=users)
+
+@app.route("/auth", methods = ["POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        pwd = request.form.get("pwd")
+        email = request.form.get("email")
+        user = db.query(model).get(username)
+        session["username"] = username
+        if user != None:
+            if pwd == user.pwd:
+                return render_template("login.html",username=username)
+            else:
+                return render_template("registration.html",username="please enter correct password")
+        else:
+            return render_template("registration.html",username="Entered Wrong username, please try again")
+                    
+@app.route("/logout",methods = ["GET"])
+def logout():
+    session.clear()
+    return redirect("/register")
+    
+

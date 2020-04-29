@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Admin</h1><br>
+        <table border = 1>
+            <th>{{ "username" }}</th>
+            <th>{{ "email" }}</th>
+            <th>{{ "password" }}</th>
+            <th>{{ "timestamp" }}</th>
+            {% for i in user_details %}
+            <tr>
+                <td> {{ i.username }}</td>
+                <td> {{ i.EmailId }}</td>
+                <td> {{ i.pwd }}</td>
+                <td> {{ i.datetime }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+</html>
